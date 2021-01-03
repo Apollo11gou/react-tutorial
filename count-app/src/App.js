@@ -1,19 +1,17 @@
 import React from "react";
 
 class App extends React.Component {
-
   constructor(props) {
     super(props);
-    this.state = { name:'にんじゃ',
-                        count:0};
+    this.state = { name: "にんじゃ", count: 0 };
   }
 
-  handleClick(name){
-    this.setState({name:name})
+  handleClick(name) {
+    this.setState({ name: name });
   }
 
-  countapp(){
-    this.setState({count: this.state.count +1});
+  countapp() {
+    this.setState({ count: this.state.count + 1 });
   }
 
   render() {
@@ -22,7 +20,9 @@ class App extends React.Component {
         <h1>こんにちは、{this.state.name}さん</h1>
         <button
           onClick={() => {
-            {this.handleClick('ひつじ')}
+            {
+              this.handleClick("ひつじ");
+            }
           }}
         >
           ひつじ
@@ -30,17 +30,23 @@ class App extends React.Component {
 
         <button
           onClick={() => {
-            {this.handleClick('にんじゃわんこ')}
+            {
+              this.handleClick("にんじゃわんこ");
+            }
           }}
         >
           にんじゃわんこ
         </button>
 
-        <h1>
-          {this.state.count}
-        </h1>
+        <h1>{this.state.count}</h1>
 
-        <button onClick={()=>{this.countapp()}}>+</button>
+        <button
+          onClick={() => {
+            this.countapp();
+          }}
+        >
+          +
+        </button>
       </div>
     );
   }
