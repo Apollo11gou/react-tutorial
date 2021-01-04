@@ -9,12 +9,14 @@ class ContactForm extends React.Component {
       email: "",
       //入力がないときにエラーメッセージの表示
       hasEmailError: false,
+
+      // コンテンツ内容のstate
+      content: "",
+      hasContentError: false,
     };
   }
 
-  handleSubmit() {
-    this.setState({ isSubmitted: true });
-  }
+  //email内容の表示
   handleEmailCahnge(event) {
     const inputValue = event.target.value;
     const isEmpty = inputValue === "";
@@ -25,8 +27,26 @@ class ContactForm extends React.Component {
     });
   }
 
+  // コンテンツ内容の表示
+  handleContentChange(event) {
+    const inputValue = event.target.value;
+    const isEmpty = inputValue === "";
+
+    this.setState({
+      content: inputValue,
+      hasContentError: isEmpty,
+    });
+  }
+
+  //送信ボタン
+  handleSubmit() {
+    this.setState({ isSubmitted: true });
+  }
+
   render() {
+    let contactForm;
     let emailErrorText;
+    let contentErrorText;
 
     if (this.state.hasEmailError) {
       emailErrorText = (
@@ -36,7 +56,13 @@ class ContactForm extends React.Component {
       );
     }
 
-    let contactForm;
+    if (this.state.hasContentError) {
+      contentErrorText = (
+        <p className="contact-message-error">
+          お問い合わせ内容を入力してください
+        </p>
+      );
+    }
 
     if (this.state.isSubmitted) {
       contactForm = <div className="contact-submit-message">送信完了</div>;
@@ -59,7 +85,14 @@ class ContactForm extends React.Component {
 
           {emailErrorText}
           <p>お問い合わせ内容(必須)</p>
-          <textarea />
+          <textarea
+            value={this.state.content}
+            onChange={(event) => {
+              this.handleContentChange(event);
+            }}
+          />
+
+          {contentErrorText}
 
           <input type="submit" value="送信" />
         </form>
