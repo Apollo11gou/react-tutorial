@@ -1,7 +1,8 @@
 #  /bin/zsh にある zsh シェルで実行
 #!/bin/zsh
-ls
-date
-echo メッセージを入力してください
-read message
-echo 入力されたメッセージ  $message
+read -p "日本で二番目に高い山は槍ヶ岳でしょうか？ [y/n]" yn
+if [ $yn = "n" ]; then
+  echo  正解です。日本で二番目に高い山は北岳です。
+else
+  echo 不正解です。日本で二番目に高い山は北岳です。
+fi
